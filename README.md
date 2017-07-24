@@ -15,7 +15,7 @@ yarn install
 ## Start Web Server
 
 ```
-node ./node_modules/http-server/bin/http-server
+node ./node_modules/http-server/bin/http-server ./__build/
 ```
 
 ## Visit a Browser

@@ -4,7 +4,9 @@ class Hello extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <Hello toWhat="World" />,
-  document.getElementById('hello_world_element')
-);
+window.addEventListener('load', function(){
+  ReactDOM.render(
+    <Hello toWhat="World" />,
+    document.getElementById('hello_world_element')
+  );
+});

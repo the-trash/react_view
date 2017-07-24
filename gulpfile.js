@@ -22,11 +22,8 @@ gulp.task('copy-react-sources', function() {
 
 gulp.task('jsx', function(){
   return gulp.src('___src/assets/javascripts/*.jsx')
-    .pipe(jsx({
-      factory: 'React.createClass'
-    }))
     .pipe(babel({
-      presets: ['es2017']
+      presets: ["es2017", "react"]
     }))
     .pipe(gulp.dest('__build'))
 });

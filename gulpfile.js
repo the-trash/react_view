@@ -2,7 +2,8 @@ var
   gulp = require('gulp'),
   pug = require('gulp-pug'),
   jsx = require('gulp-jsx'),
-  babel = require('gulp-babel');
+  babel = require('gulp-babel'),
+  concat = require('gulp-concat');
 
 gulp.task('html', function(){
   return gulp.src('___src/views/*.pug')
@@ -30,4 +31,20 @@ gulp.task('jsx', function(){
     .pipe(gulp.dest('__build'))
 });
 
-gulp.task('default', ['html', 'copy-react-sources', 'jsx']);
+gulp.task('concat-js-files', function() {
+  return gulp
+    .src([
+      '__build/react.min.js',
+      '__build/react-dom.min.js',
+      '__build/hello_world.js'
+    ])
+    .pipe(concat('app.js'))
+    .pipe(gulp.dest('__build'));
+});
+
+gulp.task('default', [
+  'html',
+  'copy-react-sources',
+  'jsx',
+  'concat-js-files'
+]);

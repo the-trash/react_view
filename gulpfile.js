@@ -10,6 +10,15 @@ gulp.task('html', function(){
     .pipe(gulp.dest('__build'))
 });
 
+gulp.task('copy-react-sources', function() {
+  return gulp
+    .src([
+      'node_modules/react/dist/react.min.js',
+      'node_modules/react-dom/dist/react-dom.min.js'
+    ])
+    .pipe(gulp.dest('__build'));
+});
+
 gulp.task('jsx', function(){
   return gulp.src('___src/assets/javascripts/*.jsx')
     .pipe(jsx({
@@ -21,4 +30,4 @@ gulp.task('jsx', function(){
     .pipe(gulp.dest('__build'))
 });
 
-gulp.task('default', ['html', 'jsx']);
+gulp.task('default', ['html', 'copy-react-sources', 'jsx']);

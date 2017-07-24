@@ -6,6 +6,12 @@
 yarn install
 ```
 
+## Build
+
+```
+./node_modules/gulp/bin/gulp.js
+```
+
 ## Start Web Server
 
 ```

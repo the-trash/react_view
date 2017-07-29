@@ -35,14 +35,16 @@ gulp.task('jsx', function(){
     .pipe(babel({
       presets: ["es2015", "react"]
     }))
+    .pipe(uglify())
     .pipe(gulp.dest('__build'))
 });
 
 gulp.task('js', function(){
   return gulp.src('___src/assets/javascripts/*.js')
     .pipe(babel({
-      presets: ["es2017"]
+      presets: ["es2015"]
     }))
+    .pipe(uglify())
     .pipe(gulp.dest('__build'))
 });
 

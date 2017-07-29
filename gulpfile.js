@@ -3,12 +3,22 @@ var
   pug = require('gulp-pug'),
   jsx = require('gulp-jsx'),
   babel = require('gulp-babel'),
-  concat = require('gulp-concat');
+  concat = require('gulp-concat'),
+  uglify = require('gulp-uglify');
 
 gulp.task('html', function(){
   return gulp.src('___src/views/*.pug')
     .pipe(pug({ pretty: true }))
     .pipe(gulp.dest('__build'))
+});
+
+gulp.task('copy-sources', function() {
+  return gulp
+    .src([
+      'node_modules/requirejs/require.js'
+    ])
+    .pipe(uglify())
+    .pipe(gulp.dest('__build'));
 });
 
 gulp.task('copy-react-sources', function() {
@@ -28,6 +38,14 @@ gulp.task('jsx', function(){
     .pipe(gulp.dest('__build'))
 });
 
+gulp.task('js', function(){
+  return gulp.src('___src/assets/javascripts/*.js')
+    .pipe(babel({
+      presets: ["es2017"]
+    }))
+    .pipe(gulp.dest('__build'))
+});
+
 gulp.task('concat-js-files', function() {
   return gulp
     .src([
@@ -42,6 +60,8 @@ gulp.task('concat-js-files', function() {
 gulp.task('default', [
   'html',
   'copy-react-sources',
+  'copy-sources',
+  'js',
   'jsx',
   'concat-js-files'
 ]);

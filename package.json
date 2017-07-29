@@ -12,8 +12,10 @@
     "gulp-concat": "^2.6.1",
     "gulp-jsx": "^2.0.1",
     "gulp-pug": "^3.3.0",
+    "gulp-uglify": "^3.0.0",
     "http-server": "^0.10.0",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "requirejs": "^2.3.4"
   }
 }

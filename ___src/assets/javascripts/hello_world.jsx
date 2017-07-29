@@ -7,10 +7,10 @@ requirejs(['react', 'react-dom'], function(React, ReactDOM){
   }
 
   setInterval(() => {
-    console.log('reRender') 
+    console.log('reRender')
 
     ReactDOM.render(
-      <Hello toWhat="World" />,
+      <Hello toWhat={"World " + (new Date).getTime()} />,
       document.getElementById('hello_world_element')
     );
   }, 1000)

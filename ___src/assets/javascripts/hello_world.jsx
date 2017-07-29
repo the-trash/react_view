@@ -6,11 +6,23 @@ requirejs(['react', 'react-dom'], function(React, ReactDOM){
     }
   }
 
+  class App extends React.Component {
+    render() {
+      return(
+        <div>
+          <Hello toWhat={"World 1 " + (new Date).getTime()} />
+          <Hello toWhat={"World 2 " + (new Date).getTime()} />
+          <Hello toWhat={"World 3 " + (new Date).getTime()} />
+        </div>
+      );
+    }
+  }
+
   setInterval(() => {
     console.log('reRender')
 
     ReactDOM.render(
-      <Hello toWhat={"World " + (new Date).getTime()} />,
+      <App />,
       document.getElementById('hello_world_element')
     );
   }, 1000)

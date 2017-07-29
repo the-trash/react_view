@@ -33,7 +33,7 @@ gulp.task('copy-react-sources', function() {
 gulp.task('jsx', function(){
   return gulp.src('___src/assets/javascripts/*.jsx')
     .pipe(babel({
-      presets: ["es2017", "react"]
+      presets: ["es2015", "react"]
     }))
     .pipe(gulp.dest('__build'))
 });

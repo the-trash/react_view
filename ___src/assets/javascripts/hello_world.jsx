@@ -1,8 +1,36 @@
-requirejs(['react', 'react-dom'], function(React, ReactDOM){
+function getByID(id){ return document.getElementById(id) }
 
+requirejs(['react', 'react-dom'], function(React, ReactDOM){
   class Hello extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = {date: new Date()}
+    }
+
+    componentDidMount() {
+      this.timerID = setInterval(() => {
+        console.log('reRender')
+        this.tick()
+      }, 1000)
+    }
+
+    componentWillUnmount() {
+      clearInterval(this.timerID)
+    }
+
+    tick() {
+      this.setState({
+        date: new Date()
+      })
+    }
+
     render() {
-      return <h1>Hello {this.props.toWhat}</h1>;
+      return(
+        <h1>
+          Hello
+          {this.props.toWhat} {this.state.date.toLocaleTimeString()}
+        </h1>
+      );
     }
   }
 
@@ -10,21 +38,13 @@ requirejs(['react', 'react-dom'], function(React, ReactDOM){
     render() {
       return(
         <div>
-          <Hello toWhat={"World 1 " + (new Date).getTime()} />
-          <Hello toWhat={"World 2 " + (new Date).getTime()} />
-          <Hello toWhat={"World 3 " + (new Date).getTime()} />
+          <Hello toWhat="World 1" />
+          <Hello toWhat="World 2" />
+          <Hello toWhat="World 3" />
         </div>
       );
     }
   }
 
-  setInterval(() => {
-    console.log('reRender')
-
-    ReactDOM.render(
-      <App />,
-      document.getElementById('hello_world_element')
-    );
-  }, 1000)
-
+  ReactDOM.render(<App />, getByID('hello_world_element'));
 })

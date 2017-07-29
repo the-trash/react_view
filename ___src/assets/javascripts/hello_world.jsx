@@ -6,9 +6,13 @@ requirejs(['react', 'react-dom'], function(React, ReactDOM){
     }
   }
 
-  ReactDOM.render(
-    <Hello toWhat="World" />,
-    document.getElementById('hello_world_element')
-  );
+  setInterval(() => {
+    console.log('reRender') 
+
+    ReactDOM.render(
+      <Hello toWhat="World" />,
+      document.getElementById('hello_world_element')
+    );
+  }, 1000)
 
 })

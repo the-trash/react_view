@@ -1,9 +1,11 @@
+window.reactVersion = '15.6.1'
+window.noCache = 'nocache=' + Math.random()
+
 requirejs.config({
   baseUrl: '/',
-  urlArgs: 'nocache=' + Math.random(),
   paths: {
-    'react': 'react.min',
-    'react-dom': 'react-dom.min'
+    'react': 'react.min.js?v' + reactVersion,
+    'react-dom': 'react-dom.min.js?v' + reactVersion
   }
 })
 
@@ -16,4 +18,4 @@ requirejs.config({
 //   console.warn('Win on Load')
 // });
 
-requirejs(['hello_world'])
+requirejs(['hello_world.js?' + noCache])

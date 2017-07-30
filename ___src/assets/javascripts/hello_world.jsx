@@ -1,36 +1,62 @@
 function getByID(id){ return document.getElementById(id) }
 
-requirejs(['react', 'react-dom'], function(React, ReactDOM){
+requirejs(['react', 'react-dom', 'redux'], function(React, ReactDOM, Redux){
+
+  const reducer = (state = { value: 0 }, action) => {
+    switch (action.type) {
+      case 'PLUS':
+        return { value: state.value + 1 }
+      case 'MINUS':
+        return { value: state.value - 1 }
+      default:
+        return state
+    }
+  }
+
+  let store = Redux.createStore(reducer)
+
   class Hello extends React.Component {
     constructor(props) {
       super(props)
-      this.state = {date: new Date()}
+      this.state = store.getState()
+
+      this.minusHandler = this.minusHandler.bind(this)
+      this.plusHandler  = this.plusHandler.bind(this)
     }
 
-    componentDidMount() {
-      this.timerID = setInterval(() => {
-        console.log('reRender')
-        this.tick()
-      }, 1000)
+    minusHandler() {
+      store.dispatch({type: 'MINUS'})
+      this.setState( store.getState() )
     }
 
-    componentWillUnmount() {
-      clearInterval(this.timerID)
-    }
-
-    tick() {
-      this.setState({
-        date: new Date()
-      })
+    plusHandler() {
+      store.dispatch({type: 'PLUS'})
+      this.setState( store.getState() )
     }
 
     render() {
       return(
-        <h1>
-          Hello
-          {this.props.toWhat} {this.state.date.toLocaleTimeString()}
-        </h1>
+        <div>
+          <button onClick={this.minusHandler}>MINUS</button>
+          <h1>Hello {this.state.value}</h1>
+          <button onClick={this.plusHandler}>PLUS</button>
+        </div>
       );
+    }
+  }
+
+  class World extends React.Component {
+    constructor(props) {
+      super(props)
+      this.state = store.getState()
+    }
+
+    render() {
+      return(
+        <div>
+          <h1>{this.state.value}</h1>
+        </div>
+      )
     }
   }
 
@@ -38,9 +64,7 @@ requirejs(['react', 'react-dom'], function(React, ReactDOM){
     render() {
       return(
         <div>
-          <Hello toWhat="World 1" />
-          <Hello toWhat="World 2" />
-          <Hello toWhat="World 3" />
+          <Hello /> <br/> <br/> <World />
         </div>
       );
     }
